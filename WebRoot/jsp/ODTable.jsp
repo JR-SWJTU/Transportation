@@ -1,8 +1,10 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
 %>
 
 <!DOCTYPE html>
@@ -52,36 +54,42 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="left-side-inner">
 				<ul class="nav nav-pills nav-stacked custom-nav">
 					<li><a href="./jsp/home.jsp"><i class="fa fa-home"></i> <span>主页</span>
-					</a></li>
+					</a>
+					</li>
 
 					<li class="menu-list"><a href=""><i class="fa fa-tasks"></i>
 							<span>公交线路浏览</span> </a>
 						<ul class="sub-menu-list">
-							<li><a href="./jsp/lineInfo.jsp"> 公交线路数据</a></li>
-							<li><a href="./jsp/lineSearch.jsp"> 公交线路搜索</a></li>
-						</ul>
-					</li>
+							<li><a href="./jsp/lineInfo.jsp"> 公交线路数据</a>
+							</li>
+							<li><a href="./jsp/lineSearch.jsp"> 公交线路搜索</a>
+							</li>
+						</ul></li>
 
 					<li class="menu-list nav-active"><a href=""><i
 							class="fa fa-th-list"></i> <span>公交OD数据</span> </a>
 						<ul class="sub-menu-list">
 							<li class="active"><a href="./servlet/ODTable?currentPage=1">
-									公交OD矩阵表</a></li>
-							<li><a href="./jsp/ODOnMap.jsp"> OD数据可视化</a></li>
-						</ul>
-					</li>
+									公交OD矩阵表</a>
+							</li>
+							<li><a href="./jsp/ODOnMap.jsp"> OD数据可视化</a>
+							</li>
+						</ul></li>
 
 					<li class="menu-list"><a href=""><i
 							class="fa fa-bar-chart-o"></i> <span>统计指标浏览</span> </a>
 						<ul class="sub-menu-list">
-							<li><a href="tabs-accordions.html"> 客流指标浏览</a></li>
-							<li><a href="./jsp/relationRules.jsp"> 运营指标浏览</a></li>
-							<li><a href="./jsp/relationRules.jsp"> 时空分布特性</a></li>
-						</ul>
-					</li>
+							<li><a href="tabs-accordions.html"> 客流指标浏览</a>
+							</li>
+							<li><a href="./jsp/relationRules.jsp"> 运营指标浏览</a>
+							</li>
+							<li><a href="./jsp/relationRules.jsp"> 时空分布特性</a>
+							</li>
+						</ul></li>
 
 					<li><a href="./jsp/login.jsp"><i class="fa fa-sign-in"></i>
-							<span>退出账号</span> </a></li>
+							<span>退出账号</span> </a>
+					</li>
 
 				</ul>
 				<!--sidebar nav end-->
@@ -119,14 +127,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 											<th>上车时间</th>
 											<th>下车站点</th>
 											<th>下车时间</th>
-											<!-- 											<th>下车站点上车人数</th>
 											<th>下车站点下车人数</th>
-											<th>车载人数</th> -->
+											<th>车载人数</th>
 											<th>WiFi设备比例系数</th>
 										</tr>
 									</thead>
 									<tbody>
-										<%int i =1; %>
+										<%
+											int i = 1;
+										%>
 										<c:forEach items="${travelrecords}" var="travelrecord">
 											<tr>
 												<td></td>
@@ -139,24 +148,39 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 												<td>${travelrecord.getStationByDesbusState().stationId
 													}</td>
 												<td>${travelrecord.desbusTime}</td>
+												<td>20</td>
+												<td>30</td>
 												<td>${travelrecord.busK}</td>
 											</tr>
 										</c:forEach>
 									</tbody>
 								</table>
 
-								<div align="right">
-									<div class="">
+					<div class="row">
+<!-- 								<div  style="left:5%">
+										<a role="button" class="btn btn-info"
+											href="./jsp/driverInfo_certificate.jsp">地图查看</a>
+								</div> -->
+								<div  align = right>
+									<div class="" >
 										<ul class="pagination">
-											<li><a href="#">«</a></li>
-											<li class="active"><a href="#">${currentPage}</a></li>
-											<li ><a href="#">${currentPage+1}</a></li>
-											<li><a href="#">${currentPage+2}</a></li>
-											<li><a href="#">${currentPage+3}</a></li>
-											<li><a href="#">${currentPage+4}</a></li>
-											<li><a href="#">»</a></li>
+											<li><a href="#">«</a>
+											</li>
+											<li class="active"><a href="#">${currentPage}</a>
+											</li>
+											<li><a href="#">${currentPage+1}</a>
+											</li>
+											<li><a href="#">${currentPage+2}</a>
+											</li>
+											<li><a href="#">${currentPage+3}</a>
+											</li>
+											<li><a href="#">${currentPage+4}</a>
+											</li>
+											<li><a href="#">»</a>
+											</li>
 										</ul>
 									</div>
+								</div>
 								</div>
 						</section>
 					</div>
@@ -168,7 +192,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<!--body wrapper end-->
 
 			<!--footer section start-->
-			<footer> 2016 &copy; 数据集合信息科技有限公司 </footer>
+			<footer class="sticky-footer"> 2016 &copy; 数据集合信息科技有限公司 </footer>
 			<!--footer section end-->
 
 		</div>

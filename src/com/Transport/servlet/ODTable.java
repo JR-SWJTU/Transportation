@@ -47,7 +47,7 @@ public class ODTable extends HttpServlet {
 		ArrayList<Travelrecord> travelrecords = new ArrayList<Travelrecord>();
 		TravelrecordDao travelrecordDao = new TravelrecordDaoImpl();
 		int currentPage = Integer.parseInt( request.getParameter("currentPage") );
-		int num = 10;
+		int num = 13;
 		travelrecords = (ArrayList<Travelrecord>) travelrecordDao.queryTravelrecordsInfo(currentPage , num);
 		Travelrecord travelrecord = new Travelrecord();
 		StationDao stationDao = new StationDaoImpl();

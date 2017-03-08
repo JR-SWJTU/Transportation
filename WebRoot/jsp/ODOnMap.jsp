@@ -1,7 +1,9 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
 %>
 
 <!DOCTYPE html>
@@ -38,7 +40,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 
 
-<body class="sticky-header left-side-collapsed">
+<body class="sticky-header">
 	<section>
 
 		<!-- 左部导航栏  -->
@@ -46,8 +48,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 			<!--logo and iconic logo start-->
 			<div class="logo">
-				<a href="index.html"><img src="images/logo.png" alt="">
-				</a>
+				<a href="index.html"><img src="images/logo.png" alt=""> </a>
 			</div>
 
 			<div class="logo-icon text-center">
@@ -59,14 +60,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<!--sidebar nav start-->
 			<div class="left-side-inner">
 				<ul class="nav nav-pills nav-stacked custom-nav">
-					<li class="active"><a href="./jsp/home.jsp"><i
-							class="fa fa-home"></i> <span>主页</span>
+					<li><a href="./jsp/home.jsp"><i class="fa fa-home"></i> <span>主页</span>
 					</a>
 					</li>
 
 					<li class="menu-list"><a href=""><i class="fa fa-tasks"></i>
-							<span>公交线路浏览</span>
-					</a>
+							<span>公交线路浏览</span> </a>
 						<ul class="sub-menu-list">
 							<li><a href="./jsp/lineInfo.jsp"> 公交线路数据</a>
 							</li>
@@ -74,19 +73,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							</li>
 						</ul></li>
 
-					<li class="menu-list"><a href=""><i class="fa fa-th-list"></i>
-							<span>公交OD数据</span>
-					</a>
+					<li class="menu-list nav-active"><a href=""><i
+							class="fa fa-th-list"></i> <span>公交OD数据</span> </a>
 						<ul class="sub-menu-list">
 							<li><a href="./jsp/ODTable.jsp"> 公交OD矩阵表</a>
 							</li>
-							<li><a href="./jsp/ODOnMap.jsp"> OD数据可视化</a>
+							<li class="active"><a href="./jsp/ODOnMap.jsp"> OD数据可视化</a>
 							</li>
 						</ul></li>
 
 					<li class="menu-list"><a href=""><i
-							class="fa fa-bar-chart-o"></i> <span>统计指标浏览</span>
-					</a>
+							class="fa fa-bar-chart-o"></i> <span>统计指标浏览</span> </a>
 						<ul class="sub-menu-list">
 							<li><a href="tabs-accordions.html"> 客流指标浏览</a>
 							</li>
@@ -97,8 +94,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</ul></li>
 
 					<li><a href="./jsp/login.jsp"><i class="fa fa-sign-in"></i>
-							<span>退出账号</span>
-					</a>
+							<span>退出账号</span> </a>
 					</li>
 
 				</ul>
@@ -119,14 +115,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 				<div>
 					<div id="map" style="width:100%; height:1000px;"></div>
-				</div>
-
-				<div>
-					<form class="form-horizontal adminex-form" method="get">
-						<div class="col-sm-10">
-							<input type="text" class="form-control" id="searchInput">
-						</div>
-					</form>
 				</div>
 
 			</section>
@@ -153,62 +141,119 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script src="js/scripts.js"></script>
 
 	<script>
-
-
-	//设置DomLibrary，jQuery或者Zepto
-	AMapUI.setDomLibrary($);
-
-	//加载BasicControl，loadUI的路径参数为模块名中 'ui/' 之后的部分
-	AMapUI.loadUI([ 'control/BasicControl' ], function(BasicControl) {
+		//设置DomLibrary，jQuery或者Zepto
+		AMapUI.setDomLibrary($);
 
 		var map = new AMap.Map('map', {
-			// resizeEnable : true,
-			zoom : 10,
+			resizeEnable : true,
+			zoom : 12,
 			center : [ 104.071791, 30.668516 ]
 		});
 
-		//缩放控件
-		map.addControl(new BasicControl.Zoom({
-			position : 'rb', //右下角
-			showZoomNum : true
-		//显示zoom值
-		}));
+		//加载BasicControl，loadUI的路径参数为模块名中 'ui/' 之后的部分
+		AMapUI.loadUI([ 'control/BasicControl' ], function(BasicControl) {
 
-		//图层切换控件
-		map.addControl(new BasicControl.LayerSwitcher({
-			position :  {	top:'20px', right:'80px',} //right top，右上角
-		}));
+			//缩放控件
+			map.addControl(new BasicControl.Zoom({
+				position : 'rb', //右下角
+				showZoomNum : true
+			//显示zoom值
+			}));
 
-		//实时交通控件
-		map.addControl(new BasicControl.Traffic({
-			position : {	top:'20px', right:'20px',}//右上角
-		}));
-	});
-	
+			//图层切换控件
+			map.addControl(new BasicControl.LayerSwitcher({
+				position : {
+					top : '20px',
+					right : '80px',
+				}
+			//right top，右上角
+			}));
 
-	//加载PoiPicker，loadUI的路径参数为模块名中 'ui/' 之后的部分
-	AMapUI.loadUI([ 'misc/PoiPicker' ], function(PoiPicker) {
-		var poiPicker = new PoiPicker({
-			input : 'searchInput' //输入框id
+			//实时交通控件
+			map.addControl(new BasicControl.Traffic({
+				open : false,
+				position : {
+					top : '20px',
+					right : '20px',
+				}
+			//右上角
+			}));
 		});
-		//监听poi选中信息
-		poiPicker.on('poiPicked', function(poiResult) {
-			//用户选中的poi点信息
-		});
-		
-		AMap.service('AMap.StationSearch', function() {//回调函数
-			//实例化StationSearch
-			stationSearch = new AMap.StationSearch();
-			//TODO: 使用stationSearch对象调用行政区查询的功能
-		})
 
-		AMap.service('AMap.LineSearch', function() {//回调函数
-			//实例化LineSearch
-			lineSearch = new AMap.LineSearch();
-			//TODO: 使用lineSearch对象调用行政区查询的功能
-		})
-	});
-</script>
+		function refresh() {
+			var features = [];
+			features.push("bg");
+			features.push("road");
+			features.push("building");
+			//features.push("point");
+			map.setFeatures(features);
+		}
+
+		refresh();
+
+		/*
+		 *公交线路查询
+		 */
+		function lineSearch(line) {
+			//加载公交线路查询插件
+			//实例化公交线路查询类，只取回一条路线
+			AMap.service([ "AMap.LineSearch" ], function() {
+				var linesearch = new AMap.LineSearch({
+					pageIndex : 1,
+					city : '成都',
+					pageSize : 10,
+					extensions : 'all'
+				});
+				//搜索“536”相关公交线路
+				linesearch.search(line, function(status, result) {
+					if (status === 'complete' && result.info === 'OK') {
+						lineSearch_Callback(result);
+					} else {
+						alert(result);
+					}
+				});
+			});
+		}
+		/*
+		 * 公交路线查询服务返回数据解析概况
+		 * param Array[]  lineArr     返回公交线路总数
+		 * param String   lineName    公交线路名称
+		 * param String   lineCity    公交所在城市
+		 * param String   company     公交所属公司
+		 * param Number   stime       首班车时间
+		 * param Number   etime       末班车时间
+		 * param Number   bprice      公交起步票价
+		 * param Number   tprice      公交全程票价
+		 * param Array[]  pathArr     公交线路路径数组
+		 */
+		function lineSearch_Callback(data) {
+			var lineArr = data.lineInfo;
+			var lineNum = data.lineInfo.length;
+			if (lineNum == 0) {
+				resLine = data.info;
+			} else {
+				for ( var i = 0; i < lineNum; i++) {
+					var pathArr = lineArr[i].path;
+					var stops = lineArr[i].via_stops;
+					var startPot = stops[0];
+					var endPot = stops[stops.length - 1];
+
+					var polyline = new AMap.Polyline({
+						path : pathArr, //设置线覆盖物路径
+						strokeColor : "#3366FF", //线颜色
+						strokeOpacity : 1, //线透明度
+						strokeWeight : 2, //线宽
+						strokeStyle : "solid", //线样式
+						strokeDasharray : [ 10, 5 ]
+					//补充线样式
+					});
+					polyline.setMap(map);
+				}
+			}
+		}
+
+		lineSearch('111');
+	</script>
 
 </body>
 </html>
